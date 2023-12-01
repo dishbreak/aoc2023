@@ -90,7 +90,8 @@ func getCalibrationNumberV2(s string) int {
 			acc = append(acc, token{
 				value: value,
 				start: j + i,
-				end:   j + i + len(sub) - 1,
+				// we know where the token ends because the token string has a known length.
+				end: j + i + len(sub) - 1,
 			})
 			j += i + 1
 		}
@@ -108,6 +109,8 @@ func getCalibrationNumberV2(s string) int {
 
 	firstDigit := tokens[0].value
 
+	// we need the leftmost number found for the second digit
+	// so we resort the array looking for the highest *ending* value
 	sort.Slice(tokens, func(i, j int) bool {
 		return tokens[i].end > tokens[j].end
 	})
