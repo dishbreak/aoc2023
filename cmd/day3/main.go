@@ -18,6 +18,8 @@ func main() {
 	defer f.Close()
 
 	fmt.Printf("Part 1: %d\n", part1(f))
+	f.Seek(0, 0)
+	fmt.Printf("Part 2: %d\n", part2(f))
 }
 
 var matchPartNum = regexp.MustCompile(`\d+`)
@@ -138,5 +140,27 @@ func part1(r io.Reader) int {
 			acc += num
 		}
 	}
+	return acc
+}
+
+func part2(r io.Reader) int {
+	symbols, parts := parseSpaces(r)
+
+	acc := 0
+
+	for p, symbol := range symbols {
+		if symbol != '*' {
+			continue
+		}
+
+		nums := findPartNums(p, parts)
+		if len(nums) != 2 {
+			continue
+		}
+
+		ratio := nums[0] * nums[1]
+		acc += ratio
+	}
+
 	return acc
 }
