@@ -1,6 +1,6 @@
 module github.com/dishbreak/aoc2023
 
-go 1.21.3
+go 1.21
 
 require github.com/stretchr/testify v1.8.4
 
