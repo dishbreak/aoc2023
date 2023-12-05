@@ -52,3 +52,13 @@ func (c Card) Score() (score int) {
 
 	return
 }
+
+func (c Card) Matches() (matches int) {
+	for _, number := range c.numbers {
+		if !c.winner[number] {
+			continue
+		}
+		matches++
+	}
+	return
+}
